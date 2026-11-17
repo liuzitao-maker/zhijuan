@@ -184,6 +184,14 @@ npm run build
 npm start        # 访问 http://localhost:8787
 ```
 
+### 6. 自动化测试（可选）
+
+```bash
+npm test                            # 8 个单元测试：结构校验、分值归位、答案修正
+node scripts/smoke.mjs              # 全链路冒烟测试（真实调用模型）
+node scripts/check-robustness.mjs   # 多学科回归（数据结构 / 计算机网络 / 概率论）
+```
+
 ### 常见问题
 
 | 现象 | 原因与解法 |

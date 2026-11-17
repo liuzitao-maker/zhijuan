@@ -10,7 +10,9 @@
     "dev:server": "node --watch server/index.js",
     "build": "vite build",
     "start": "node server/index.js",
-    "smoke": "node scripts/smoke.mjs"
+    "smoke": "node scripts/smoke.mjs",
+    "test": "node --test",
+    "check": "node scripts/check-robustness.mjs"
   },
   "engines": {
     "node": ">=20.12"
