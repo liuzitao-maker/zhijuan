@@ -75,6 +75,7 @@ export function buildGenerateMessages(spec) {
 
 export const REVIEWER_SYSTEM = `你是一位极其挑剔的独立审题专家。你的职责是「找错」，不是「夸奖」。
 你与命题人是不同的角色，默认假设这份试卷存在问题，只有在你逐题核查后确实找不到问题时，才允许判定通过。
+但请注意：挑剔不等于编造。如果一道题确实没问题，就不要为了显得认真而硬造问题。
 
 逐题必须核查以下项目：
 1. 超纲：题目是否考查了用户给定知识点之外的内容？
@@ -82,13 +83,30 @@ export const REVIEWER_SYSTEM = `你是一位极其挑剔的独立审题专家。
 3. 选项缺陷：单选题是否出现多个正确答案或零个正确答案？干扰项是否有重复或语义相同？
 4. 歧义：题干是否存在两种以上合理解读？
 5. 判分不可行：填空题答案是否唯一确定？简答题参考答案是否足够具体到可评分？
-6. 分值：总和是否等于要求的总分？单题分值是否合理？
-7. 公式：LaTeX 是否语法正确、是否能正常渲染？
+6. 公式：LaTeX 是否语法正确、是否能正常渲染？
 
-输出 JSON：{"passed": true|false, "issues": [{"questionId": "q1", "category": "超纲|答案错误|选项缺陷|歧义|不可判分|分值|公式", "severity": "blocker|major|minor", "detail": "具体问题描述"}], "summary": "一句话总体评价"}
-只要存在 blocker 或 major 问题，passed 必须为 false。`
+关于分值的特别说明：
+- 各题分值之和是否等于要求的总分，**程序已经校验过，你不需要再核算**。
+- 单题分值的高低分配是否「合理」属于风格建议，一律归为 minor，不得标为 major 或 blocker。
 
-export function buildReviewMessages(spec, paper) {
+严重度（severity）的判定标准，必须严格遵守：
+- blocker：会导致题目**客观错误**或**无法作答/无法判分**，例如答案错误、单选题有多个正确选项、题干缺失、超纲考查。
+- major：明显影响作答质量，但学生仍能合理作答，例如题干表述会造成普遍误解、简答题评分要点缺失导致无法给分。
+- minor：风格、统一性、格式、分值分配、措辞优化等**建议性**问题。minor 绝不允许写成 major。
+
+只要存在 blocker 或 major 问题，passed 必须为 false；如果只有 minor 问题，passed 必须为 true。
+
+输出 JSON：{"passed": true|false, "issues": [{"questionId": "q1", "category": "超纲|答案错误|选项缺陷|歧义|不可判分|公式|风格", "severity": "blocker|major|minor", "detail": "具体问题描述"}], "summary": "一句话总体评价"}`
+
+export function buildReviewMessages(spec, paper, { round = 1 } = {}) {
+  const roundNote =
+    round >= 2
+      ? [
+          `注意：这是第 ${round} 轮复核。命题人已针对上一轮问题做过修复，请不要重复报告你认为已经修复的问题；`,
+          `本轮只需报告 blocker 级别的客观错误。对于 minor 级别的风格建议，直接忽略，不要影响 passed 判定。`,
+        ].join('\n')
+      : ''
+
   return [
     { role: 'system', content: REVIEWER_SYSTEM },
     {
@@ -96,19 +114,25 @@ export function buildReviewMessages(spec, paper) {
       content: [
         `用户原始的命题要求：`,
         `学科：${spec.subject}；知识点：${spec.topic}；题数：${spec.count}；总分：${spec.totalPoints}；难度：${spec.difficulty}；题型：${spec.types.join('/')}`,
+        roundNote,
         ``,
         `待审查的试卷 JSON：`,
         JSON.stringify(paper, null, 2),
         ``,
         `请逐题核查后输出 JSON。`,
-      ].join('\n'),
+      ]
+        .filter(Boolean)
+        .join('\n'),
     },
   ]
 }
 
 export const REPAIR_SYSTEM = `你是命题修复专家。你会收到一份试卷、以及独立审题专家提出的问题清单。
 你的任务是：只修改有问题的题目，保留没有问题的题目，然后输出修复后的完整试卷 JSON。
-注意：输出的必须是完整试卷（包含全部题目），而不是增量补丁。仍然严格遵守原始 JSON 契约。`
+注意：
+1. 输出的必须是完整试卷（包含全部题目），而不是增量补丁。仍然严格遵守原始 JSON 契约。
+2. 只修复 severity 为 blocker 或 major 的问题；minor 是建议性意见，可以选择性采纳，不要为了它大改题目。
+3. 不要改动已经正确的题目的知识点与答案。`
 
 export function buildRepairMessages(spec, paper, issues) {
   return [

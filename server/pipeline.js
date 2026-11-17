@@ -115,7 +115,7 @@ export async function runGenerationPipeline(spec, { emit, signal }) {
 
     const reviewStartedAt = Date.now()
     const reviewResult = await completeJson({
-      messages: buildReviewMessages(spec, paper),
+      messages: buildReviewMessages(spec, paper, { round }),
       temperature: 0.15,
       maxTokens: 4000,
       signal,
@@ -125,8 +125,11 @@ export async function runGenerationPipeline(spec, { emit, signal }) {
 
     const rawReview = reviewResult.data ?? {}
     const issues = Array.isArray(rawReview.issues) ? rawReview.issues : []
+    // 收敛策略：第 1 轮 blocker 与 major 都阻断；后续轮次只让 blocker 阻断，
+    // 避免陷入「审题者不断提出新的风格建议 → 永远无法通过」的死循环。
     const blocking = issues.filter(
-      (issue) => issue?.severity === 'blocker' || issue?.severity === 'major',
+      (issue) =>
+        issue?.severity === 'blocker' || (round === 1 && issue?.severity === 'major'),
     )
     const passed = rawReview.passed === true && blocking.length === 0
 
