@@ -51,11 +51,12 @@ function normalizeOptions(rawOptions) {
  * 完全不需要花一轮模型修复去解决。优先从分值最大的题开始吸收差值，
  * 并保证每题最低 1 分。
  */
-function reconcilePoints(questions, targetPoints) {
+export function reconcilePoints(questions, targetPoints) {
   if (questions.length === 0) return false
   let total = questions.reduce((sum, question) => sum + question.points, 0)
   let diff = Number((targetPoints - total).toFixed(2))
-  if (Math.abs(diff) < 0.01) return false
+  // 已经精确匹配：无需调整，视为成功（返回 false 会被调用方误判为失败）
+  if (Math.abs(diff) < 0.01) return true
 
   const order = questions
     .map((_, index) => index)

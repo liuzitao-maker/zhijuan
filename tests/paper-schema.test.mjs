@@ -52,6 +52,18 @@ function makeRaw(overrides = {}) {
   }
 }
 
+test('分值本来就正确时不应误报失败', () => {
+  const raw = makeRaw()
+  // 10 + 10 + 10 = 30，与 SPEC.totalPoints 完全一致
+  const { paper, issues } = normalizePaper(raw, SPEC)
+  const total = paper.questions.reduce((sum, question) => sum + question.points, 0)
+  assert.equal(total, SPEC.totalPoints)
+  assert.equal(
+    issues.some((issue) => issue.includes('无法调整')),
+    false,
+  )
+})
+
 test('分值不符时自动归位到目标总分', () => {
   const raw = makeRaw()
   raw.questions[0].points = 1
