@@ -1,0 +1,1476 @@
+[
+  {
+    "title": "条件概率与贝叶斯公式专题测试",
+    "subject": "概率论与数理统计",
+    "knowledgePoints": [
+      "条件概率",
+      "贝叶斯公式"
+    ],
+    "difficulty": "medium",
+    "durationMin": 45,
+    "questions": [
+      {
+        "id": "q1",
+        "type": "single",
+        "knowledgePoint": "条件概率",
+        "difficulty": "easy",
+        "stem": "设 $P(A)=0.5$，$P(B)=0.4$，$P(A\\cup B)=0.7$，则 $P(A|B)$ 等于（ ）",
+        "options": [
+          {
+            "key": "A",
+            "text": "0.25"
+          },
+          {
+            "key": "B",
+            "text": "0.5"
+          },
+          {
+            "key": "C",
+            "text": "0.75"
+          },
+          {
+            "key": "D",
+            "text": "0.8"
+          }
+        ],
+        "answer": "B",
+        "explanation": "由加法公式 $P(A\\cap B)=P(A)+P(B)-P(A\\cup B)=0.5+0.4-0.7=0.2$，所以 $P(A|B)=\\frac{P(A\\cap B)}{P(B)}=\\frac{0.2}{0.4}=0.5$。常见错误是直接用 $P(A)$ 或忘记减去交集。",
+        "points": 8
+      },
+      {
+        "id": "q2",
+        "type": "single",
+        "knowledgePoint": "贝叶斯公式",
+        "difficulty": "medium",
+        "stem": "某工厂有甲、乙两条生产线，产量分别占 60% 和 40%，次品率分别为 2% 和 5%。现从总产品中任取一件，发现是次品，则该次品来自甲生产线的概率为（ ）",
+        "options": [
+          {
+            "key": "A",
+            "text": "0.375"
+          },
+          {
+            "key": "B",
+            "text": "0.6"
+          },
+          {
+            "key": "C",
+            "text": "0.625"
+          },
+          {
+            "key": "D",
+            "text": "0.8"
+          }
+        ],
+        "answer": "A",
+        "explanation": "设 $A$ 为产品来自甲线，$B$ 为次品。由贝叶斯公式：$P(A|B)=\\frac{P(A)P(B|A)}{P(A)P(B|A)+P(\\bar A)P(B|\\bar A)}=\\frac{0.6\\times0.02}{0.6\\times0.02+0.4\\times0.05}=\\frac{0.012}{0.032}=0.375$。常见错误是忽略先验概率，直接比较次品率。",
+        "points": 10
+      },
+      {
+        "id": "q3",
+        "type": "fill",
+        "knowledgePoint": "条件概率",
+        "difficulty": "medium",
+        "stem": "已知 $P(A)=\\frac{1}{3}$，$P(B|A)=\\frac{1}{2}$，$P(B|\\bar A)=\\frac{1}{4}$，则 $P(A|B)=$ ______。（结果用最简分数表示）",
+        "options": [],
+        "answer": "1/2",
+        "explanation": "先由全概率公式求 $P(B)=P(A)P(B|A)+P(\\bar A)P(B|\\bar A)=\\frac{1}{3}\\times\\frac{1}{2}+\\frac{2}{3}\\times\\frac{1}{4}=\\frac{1}{6}+\\frac{1}{6}=\\frac{1}{3}$，再由贝叶斯公式 $P(A|B)=\\frac{P(A)P(B|A)}{P(B)}=\\frac{1/6}{1/3}=\\frac{1}{2}$。常见错误是分母只计算 $P(A)P(B|A)$ 或漏乘先验概率。",
+        "points": 10
+      },
+      {
+        "id": "q4",
+        "type": "fill",
+        "knowledgePoint": "贝叶斯公式",
+        "difficulty": "hard",
+        "stem": "某地区肝癌发病率为 0.0004。甲胎蛋白法检测肝癌的灵敏度为 0.99（即患者检测阳性的概率），特异度为 0.999（即非患者检测阴性的概率）。若某人检测结果为阳性，则他真正患肝癌的概率约为 ______（保留四位小数）。",
+        "options": [],
+        "answer": "0.2839|0.284",
+        "explanation": "设 $D$ 为患病，$+$ 为阳性。$P(D)=0.0004$，$P(+|D)=0.99$，$P(+|\\bar D)=1-0.999=0.001$。由贝叶斯公式，$P(D|+)=\\frac{0.0004\\times0.99}{0.0004\\times0.99+0.9996\\times0.001}=\\frac{0.000396}{0.000396+0.0009996}\\approx0.2839$。常见错误是直接认为灵敏度就是患病概率，忽略先验概率极低。",
+        "points": 12
+      },
+      {
+        "id": "q5",
+        "type": "short",
+        "knowledgePoint": "条件概率",
+        "difficulty": "medium",
+        "stem": "简述条件概率 $P(A|B)$ 与一般概率 $P(A)$ 的区别与联系，并说明在什么情况下 $P(A|B)=P(A)$。",
+        "options": [],
+        "answer": "区别：$P(A)$ 是无条件下事件 A 发生的概率；$P(A|B)$ 是在已知事件 B 发生的条件下 A 发生的概率，样本空间缩小为 B。联系：$P(A|B)=\\frac{P(A\\cap B)}{P(B)}$（$P(B)>0$），当 A 与 B 独立时 $P(A|B)=P(A)$。",
+        "explanation": "评分要点：①正确写出条件概率公式（2分）；②指出样本空间缩小（2分）；③说明独立时两者相等（2分）。常见错误是混淆 $P(A|B)$ 与 $P(B|A)$，或忽略 $P(B)>0$ 的条件。",
+        "points": 10
+      },
+      {
+        "id": "q6",
+        "type": "short",
+        "knowledgePoint": "贝叶斯公式",
+        "difficulty": "hard",
+        "stem": "叙述贝叶斯公式，并说明公式中先验概率与后验概率的含义。",
+        "options": [],
+        "answer": "贝叶斯公式：若 $B_1,\\dots,B_n$ 为完备事件组，$P(B_i)>0$，则对任意事件 A（$P(A)>0$），$P(B_i|A)=\\frac{P(B_i)P(A|B_i)}{\\sum_{j=1}^n P(B_j)P(A|B_j)}$。先验概率 $P(B_i)$ 是在观察到 A 之前对 $B_i$ 发生可能性的判断；后验概率 $P(B_i|A)$ 是在观察到 A 之后对 $B_i$ 发生可能性的修正。",
+        "explanation": "评分要点：①正确写出贝叶斯公式（3分）；②解释先验概率含义（2分）；③解释后验概率含义（2分）。常见错误是分母漏写全概率公式，或混淆先验与后验。",
+        "points": 10
+      }
+    ],
+    "id": "paper_mwkgssl1l4vhnx",
+    "createdAt": "2026-11-17T09:03:05.653Z",
+    "totalPoints": 60,
+    "spec": {
+      "subject": "概率论与数理统计",
+      "topic": "条件概率与贝叶斯公式",
+      "count": 6,
+      "totalPoints": 60,
+      "difficulty": "medium",
+      "types": [
+        "single",
+        "fill",
+        "short"
+      ],
+      "extra": ""
+    },
+    "review": {
+      "passed": true,
+      "issues": [],
+      "summary": "六道题均围绕条件概率与贝叶斯公式，答案经独立核算全部正确，选项无重复且唯一，填空题答案确定，简答题评分要点具体，未发现超纲、歧义或公式渲染问题。",
+      "rounds": 1
+    },
+    "pipelineTrace": [
+      {
+        "id": "t1",
+        "at": 1794906175952,
+        "stage": "pipeline",
+        "status": "running",
+        "title": "启动命题流水线",
+        "detail": "概率论与数理统计 · 条件概率与贝叶斯公式 · 6 题 · 总分 60"
+      },
+      {
+        "id": "t2",
+        "at": 1794906175952,
+        "stage": "generate",
+        "status": "running",
+        "round": 1,
+        "title": "出题 Agent 生成试卷",
+        "detail": "正在命制题目…"
+      },
+      {
+        "id": "t3",
+        "at": 1794906184217,
+        "stage": "generate",
+        "status": "passed",
+        "round": 1,
+        "durationMs": 8265,
+        "title": "试卷生成完成",
+        "detail": "6 题 · 总分 60 · 用时 8.265s",
+        "tokens": {
+          "promptTokens": 645,
+          "completionTokens": 1722,
+          "totalTokens": 2367
+        }
+      },
+      {
+        "id": "t4",
+        "at": 1794906184217,
+        "stage": "validate",
+        "status": "passed",
+        "round": 1,
+        "title": "本地结构校验",
+        "detail": "题型 / 选项 / 答案 / 分值 / 解析 全部通过",
+        "issues": []
+      },
+      {
+        "id": "t5",
+        "at": 1794906184217,
+        "stage": "review",
+        "status": "running",
+        "round": 1,
+        "title": "独立审题 Agent 交叉复核",
+        "detail": "敌对视角：默认假设题目有错，逐题核查超纲/答案/歧义"
+      },
+      {
+        "id": "t6",
+        "at": 1794906185653,
+        "stage": "review",
+        "status": "passed",
+        "round": 1,
+        "durationMs": 1436,
+        "title": "审题通过",
+        "detail": "六道题均围绕条件概率与贝叶斯公式，答案经独立核算全部正确，选项无重复且唯一，填空题答案确定，简答题评分要点具体，未发现超纲、歧义或公式渲染问题。",
+        "issues": []
+      },
+      {
+        "id": "t7",
+        "at": 1794906185653,
+        "stage": "done",
+        "status": "passed",
+        "title": "流水线完成",
+        "detail": "共 1 轮 · 累计 4945 tokens",
+        "tokens": {
+          "promptTokens": 3027,
+          "completionTokens": 1918,
+          "totalTokens": 4945
+        }
+      }
+    ],
+    "usage": {
+      "promptTokens": 3027,
+      "completionTokens": 1918,
+      "totalTokens": 4945
+    },
+    "rounds": 1,
+    "elapsedMs": 9701
+  },
+  {
+    "title": "计算机网络：TCP 三次握手与拥塞控制 专项测试",
+    "subject": "计算机网络",
+    "knowledgePoints": [
+      "TCP 三次握手",
+      "TCP 拥塞控制"
+    ],
+    "difficulty": "medium",
+    "durationMin": 45,
+    "questions": [
+      {
+        "id": "q1",
+        "type": "single",
+        "knowledgePoint": "TCP 三次握手",
+        "difficulty": "easy",
+        "stem": "TCP 建立连接时采用三次握手的首要目的是什么？",
+        "options": [
+          {
+            "key": "A",
+            "text": "防止已失效的连接请求报文段突然又传到服务器，导致错误连接"
+          },
+          {
+            "key": "B",
+            "text": "提高数据传输的速率"
+          },
+          {
+            "key": "C",
+            "text": "确保双方的操作系统版本一致"
+          },
+          {
+            "key": "D",
+            "text": "协商双方使用的加密算法"
+          }
+        ],
+        "answer": "A",
+        "explanation": "三次握手的核心目的是同步双方初始序号并确认双方收发能力正常，同时防止旧连接请求造成资源浪费。B 错误，握手不直接提高传输速率；C、D 不是 TCP 握手的功能。",
+        "points": 8
+      },
+      {
+        "id": "q2",
+        "type": "single",
+        "knowledgePoint": "TCP 三次握手",
+        "difficulty": "medium",
+        "stem": "TCP 三次握手过程中，第二次握手报文段（SYN+ACK）的确认号字段值应为多少？",
+        "options": [
+          {
+            "key": "A",
+            "text": "客户端初始序号 seq=x"
+          },
+          {
+            "key": "B",
+            "text": "客户端初始序号加 1，即 x+1"
+          },
+          {
+            "key": "C",
+            "text": "服务器初始序号 seq=y"
+          },
+          {
+            "key": "D",
+            "text": "服务器初始序号加 1，即 y+1"
+          }
+        ],
+        "answer": "B",
+        "explanation": "第二次握手由服务器发出，其确认号是对客户端 SYN 的确认，应为客户端初始序号加 1（x+1），表示期望收到客户端的下一个字节。A、C、D 均不符合确认号语义。",
+        "points": 10
+      },
+      {
+        "id": "q3",
+        "type": "multiple",
+        "knowledgePoint": "TCP 拥塞控制",
+        "difficulty": "medium",
+        "stem": "关于 TCP 拥塞控制中的慢开始（慢启动）算法，下列说法正确的有？",
+        "options": [
+          {
+            "key": "A",
+            "text": "每经过一个传输轮次，拥塞窗口 cwnd 翻倍"
+          },
+          {
+            "key": "B",
+            "text": "慢开始门限 ssthresh 初始值通常设置得很大"
+          },
+          {
+            "key": "C",
+            "text": "慢开始阶段 cwnd 按线性规律增长"
+          },
+          {
+            "key": "D",
+            "text": "当 cwnd 达到 ssthresh 时，改用拥塞避免算法"
+          }
+        ],
+        "answer": [
+          "A",
+          "B",
+          "D"
+        ],
+        "explanation": "慢开始阶段 cwnd 按指数规律增长（每轮翻倍），当 cwnd 达到 ssthresh 后转入拥塞避免，按线性增长。因此 A、B、D 正确，C 描述的是拥塞避免阶段，错误。",
+        "points": 12
+      },
+      {
+        "id": "q4",
+        "type": "multiple",
+        "knowledgePoint": "TCP 拥塞控制",
+        "difficulty": "hard",
+        "stem": "TCP 拥塞控制中，当发生超时重传时，下列哪些调整是合理的？",
+        "options": [
+          {
+            "key": "A",
+            "text": "将慢开始门限 ssthresh 设置为当前拥塞窗口值的一半"
+          },
+          {
+            "key": "B",
+            "text": "将拥塞窗口 cwnd 重置为 1 个 MSS"
+          },
+          {
+            "key": "C",
+            "text": "立即将拥塞窗口 cwnd 翻倍"
+          },
+          {
+            "key": "D",
+            "text": "重新进入慢开始阶段"
+          }
+        ],
+        "answer": [
+          "A",
+          "B",
+          "D"
+        ],
+        "explanation": "超时重传表明网络可能严重拥塞，标准做法是将 ssthresh 设为当前 cwnd 的一半，cwnd 重置为 1 个 MSS，并重新执行慢开始。C 会加剧拥塞，错误。",
+        "points": 10
+      },
+      {
+        "id": "q5",
+        "type": "short",
+        "knowledgePoint": "TCP 三次握手",
+        "difficulty": "medium",
+        "stem": "简述 TCP 三次握手的过程，并说明为什么两次握手不足以建立可靠连接。",
+        "options": [],
+        "answer": "第一次：客户端发送 SYN=1，seq=x；第二次：服务器回复 SYN=1，ACK=1，seq=y，ack=x+1；第三次：客户端发送 ACK=1，ack=y+1。两次握手无法确认客户端的接收能力和服务器自己的发送能力，且可能因旧 SYN 到达而建立错误连接。",
+        "explanation": "评分要点：①正确描述三次握手各报文的关键标志和序号（3 分）；②指出两次握手不能确认客户端接收能力或防止旧连接请求（3 分）；③语言简洁准确（1 分）。常见错误是遗漏确认号或混淆 SYN 与 ACK 的方向。",
+        "points": 10
+      },
+      {
+        "id": "q6",
+        "type": "short",
+        "knowledgePoint": "TCP 拥塞控制",
+        "difficulty": "medium",
+        "stem": "说明 TCP 拥塞控制中慢开始、拥塞避免、快重传和快恢复四种算法的基本思想。",
+        "options": [],
+        "answer": "慢开始：cwnd 从 1 开始指数增长至 ssthresh；拥塞避免：cwnd 线性增长；快重传：收到三个重复 ACK 立即重传丢失报文；快恢复：不回到慢开始，将 ssthresh 和 cwnd 减半后进入拥塞避免。",
+        "explanation": "评分要点：①准确说明慢开始的指数增长（2 分）；②说明拥塞避免的线性增长（2 分）；③说明快重传触发条件（3 分）；④说明快恢复的窗口调整（3 分）。常见错误是把快恢复与慢开始混淆。",
+        "points": 10
+      }
+    ],
+    "id": "paper_mwkgsl38fm8d7k",
+    "createdAt": "2026-11-17T09:02:55.940Z",
+    "totalPoints": 60,
+    "spec": {
+      "subject": "计算机网络",
+      "topic": "TCP 三次握手与拥塞控制",
+      "count": 6,
+      "totalPoints": 60,
+      "difficulty": "medium",
+      "types": [
+        "single",
+        "multiple",
+        "short"
+      ],
+      "extra": ""
+    },
+    "review": {
+      "passed": true,
+      "issues": [],
+      "summary": "六道题均围绕 TCP 三次握手与拥塞控制，答案正确、选项无重复、简答题评分要点具体，未发现超纲或歧义问题。",
+      "rounds": 1
+    },
+    "pipelineTrace": [
+      {
+        "id": "t1",
+        "at": 1794906166515,
+        "stage": "pipeline",
+        "status": "running",
+        "title": "启动命题流水线",
+        "detail": "计算机网络 · TCP 三次握手与拥塞控制 · 6 题 · 总分 60"
+      },
+      {
+        "id": "t2",
+        "at": 1794906166515,
+        "stage": "generate",
+        "status": "running",
+        "round": 1,
+        "title": "出题 Agent 生成试卷",
+        "detail": "正在命制题目…"
+      },
+      {
+        "id": "t3",
+        "at": 1794906174950,
+        "stage": "generate",
+        "status": "passed",
+        "round": 1,
+        "durationMs": 8435,
+        "title": "试卷生成完成",
+        "detail": "6 题 · 总分 60 · 用时 8.435s",
+        "tokens": {
+          "promptTokens": 642,
+          "completionTokens": 1478,
+          "totalTokens": 2120
+        }
+      },
+      {
+        "id": "t4",
+        "at": 1794906174950,
+        "stage": "validate",
+        "status": "passed",
+        "round": 1,
+        "title": "本地结构校验",
+        "detail": "题型 / 选项 / 答案 / 分值 / 解析 全部通过",
+        "issues": []
+      },
+      {
+        "id": "t5",
+        "at": 1794906174950,
+        "stage": "review",
+        "status": "running",
+        "round": 1,
+        "title": "独立审题 Agent 交叉复核",
+        "detail": "敌对视角：默认假设题目有错，逐题核查超纲/答案/歧义"
+      },
+      {
+        "id": "t6",
+        "at": 1794906175940,
+        "stage": "review",
+        "status": "passed",
+        "round": 1,
+        "durationMs": 990,
+        "title": "审题通过",
+        "detail": "六道题均围绕 TCP 三次握手与拥塞控制，答案正确、选项无重复、简答题评分要点具体，未发现超纲或歧义问题。",
+        "issues": []
+      },
+      {
+        "id": "t7",
+        "at": 1794906175940,
+        "stage": "done",
+        "status": "passed",
+        "title": "流水线完成",
+        "detail": "共 1 轮 · 累计 4468 tokens",
+        "tokens": {
+          "promptTokens": 2806,
+          "completionTokens": 1662,
+          "totalTokens": 4468
+        }
+      }
+    ],
+    "usage": {
+      "promptTokens": 2806,
+      "completionTokens": 1662,
+      "totalTokens": 4468
+    },
+    "rounds": 1,
+    "elapsedMs": 9425
+  },
+  {
+    "title": "数据结构：二叉树遍历与性质专项测试",
+    "subject": "数据结构",
+    "knowledgePoints": [
+      "二叉树遍历",
+      "二叉树性质"
+    ],
+    "difficulty": "medium",
+    "durationMin": 45,
+    "questions": [
+      {
+        "id": "q1",
+        "type": "single",
+        "knowledgePoint": "二叉树遍历",
+        "difficulty": "easy",
+        "stem": "已知一棵二叉树的先序遍历序列为 ABDECF，中序遍历序列为 DBEAFC，则其后序遍历序列为（ ）。",
+        "options": [
+          {
+            "key": "A",
+            "text": "DEBFCA"
+          },
+          {
+            "key": "B",
+            "text": "DEBCFA"
+          },
+          {
+            "key": "C",
+            "text": "DBEFCA"
+          },
+          {
+            "key": "D",
+            "text": "EDBFCA"
+          }
+        ],
+        "answer": "B",
+        "explanation": "根据先序序列第一个元素 A 确定根，中序序列中 A 左侧 DB E 为左子树，右侧 FC 为右子树。递归可得后序序列为 DEBFCA。常见错误是混淆左右子树中序序列的顺序，导致选项 C 或 D。",
+        "points": 10
+      },
+      {
+        "id": "q2",
+        "type": "single",
+        "knowledgePoint": "二叉树性质",
+        "difficulty": "medium",
+        "stem": "一棵完全二叉树共有 1001 个结点，则其叶子结点的个数为（ ）。",
+        "options": [
+          {
+            "key": "A",
+            "text": "500"
+          },
+          {
+            "key": "B",
+            "text": "501"
+          },
+          {
+            "key": "C",
+            "text": "502"
+          },
+          {
+            "key": "D",
+            "text": "499"
+          }
+        ],
+        "answer": "B",
+        "explanation": "完全二叉树中，度为 1 的结点个数 n1 只能是 0 或 1。结点总数 n = n0 + n1 + n2，且 n0 = n2 + 1。代入 n=1001 得 1001 = 2n0 - 1 + n1。由于 2n0 - 1 为奇数，故 n1 必须为 0，则 n0 = 501。常见错误是误用满二叉树公式或忘记 n0 与 n2 的关系。",
+        "points": 10
+      },
+      {
+        "id": "q3",
+        "type": "single",
+        "knowledgePoint": "二叉树遍历",
+        "difficulty": "hard",
+        "stem": "在二叉树的中序遍历中，若结点 X 是结点 Y 的祖先，则下列叙述中正确的是（ ）。",
+        "options": [
+          {
+            "key": "A",
+            "text": "X 一定在 Y 之前被访问"
+          },
+          {
+            "key": "B",
+            "text": "X 一定在 Y 之后被访问"
+          },
+          {
+            "key": "C",
+            "text": "X 可能在 Y 之前或之后被访问"
+          },
+          {
+            "key": "D",
+            "text": "X 和 Y 的访问顺序不确定，取决于树的具体形态"
+          }
+        ],
+        "answer": "C",
+        "explanation": "中序遍历的顺序是左子树、根、右子树。若 X 是 Y 的祖先，则 Y 可能在 X 的左子树中（此时 Y 先于 X 被访问），也可能在 X 的右子树中（此时 X 先于 Y 被访问）。因此 X 可能在 Y 之前或之后被访问。常见错误是认为祖先一定先访问或后访问，混淆了先序和中序的特点。",
+        "points": 10
+      },
+      {
+        "id": "q4",
+        "type": "fill",
+        "knowledgePoint": "二叉树性质",
+        "difficulty": "medium",
+        "stem": "一棵深度为 5 的满二叉树（根结点深度为 1）共有 ______ 个结点。",
+        "options": [],
+        "answer": "31",
+        "explanation": "深度为 h 的满二叉树结点总数为 $2^h - 1$。代入 h=5，得 $2^5 - 1 = 31$。常见错误是误算为 $2^5=32$ 或忘记减 1。",
+        "points": 10
+      },
+      {
+        "id": "q5",
+        "type": "fill",
+        "knowledgePoint": "二叉树遍历",
+        "difficulty": "medium",
+        "stem": "已知一棵二叉树的先序遍历序列为 ABDCE，中序遍历序列为 BDACE，则其后序遍历序列为 ______。",
+        "options": [],
+        "answer": "DBCEA",
+        "explanation": "先序第一个 A 为根，中序中 A 左侧 BD 为左子树，右侧 CE 为右子树。递归：左子树先序 BD、中序 BD，得后序 DB；右子树先序 CE、中序 CE，得后序 EC。最后访问根 A，故后序序列为 DBCEA。常见错误是左右子树后序顺序颠倒。",
+        "points": 10
+      },
+      {
+        "id": "q6",
+        "type": "short",
+        "knowledgePoint": "二叉树遍历",
+        "difficulty": "medium",
+        "stem": "请简述二叉树先序遍历、中序遍历和后序遍历的递归定义，并说明它们的主要区别。",
+        "options": [],
+        "answer": "先序遍历：访问根结点；先序遍历左子树；先序遍历右子树。中序遍历：中序遍历左子树；访问根结点；中序遍历右子树。后序遍历：后序遍历左子树；后序遍历右子树；访问根结点。主要区别在于访问根结点的时机：先序在遍历子树之前，中序在遍历左子树之后、右子树之前，后序在遍历子树之后。",
+        "explanation": "评分要点：1. 正确写出三种遍历的递归定义（各 2 分，共 6 分）；2. 指出根本区别是访问根结点的时机不同（2 分）；3. 语言表述清晰准确（2 分）。常见错误是混淆中序和先序的定义，或漏写访问根结点的步骤。",
+        "points": 10
+      }
+    ],
+    "id": "paper_mwkgsdt2nbolhu",
+    "createdAt": "2026-11-17T09:02:46.502Z",
+    "totalPoints": 60,
+    "spec": {
+      "subject": "数据结构",
+      "topic": "二叉树遍历与性质",
+      "count": 6,
+      "totalPoints": 60,
+      "difficulty": "medium",
+      "types": [
+        "single",
+        "fill",
+        "short"
+      ],
+      "extra": ""
+    },
+    "review": {
+      "passed": true,
+      "issues": [],
+      "summary": "六道题均核查无误：遍历序列推导、完全二叉树叶子数、祖先在中序中的相对位置、满二叉树结点数、递归定义简答均正确且可判分，未发现超纲、答案错误、选项缺陷或歧义问题。",
+      "rounds": 1
+    },
+    "pipelineTrace": [
+      {
+        "id": "t1",
+        "at": 1794906157302,
+        "stage": "pipeline",
+        "status": "running",
+        "title": "启动命题流水线",
+        "detail": "数据结构 · 二叉树遍历与性质 · 6 题 · 总分 60"
+      },
+      {
+        "id": "t2",
+        "at": 1794906157302,
+        "stage": "generate",
+        "status": "running",
+        "round": 1,
+        "title": "出题 Agent 生成试卷",
+        "detail": "正在命制题目…"
+      },
+      {
+        "id": "t3",
+        "at": 1794906164922,
+        "stage": "generate",
+        "status": "passed",
+        "round": 1,
+        "durationMs": 7620,
+        "title": "试卷生成完成",
+        "detail": "6 题 · 总分 60 · 用时 7.62s",
+        "tokens": {
+          "promptTokens": 637,
+          "completionTokens": 1389,
+          "totalTokens": 2026
+        }
+      },
+      {
+        "id": "t4",
+        "at": 1794906164922,
+        "stage": "validate",
+        "status": "passed",
+        "round": 1,
+        "title": "本地结构校验",
+        "detail": "题型 / 选项 / 答案 / 分值 / 解析 全部通过",
+        "issues": []
+      },
+      {
+        "id": "t5",
+        "at": 1794906164922,
+        "stage": "review",
+        "status": "running",
+        "round": 1,
+        "title": "独立审题 Agent 交叉复核",
+        "detail": "敌对视角：默认假设题目有错，逐题核查超纲/答案/歧义"
+      },
+      {
+        "id": "t6",
+        "at": 1794906166502,
+        "stage": "review",
+        "status": "passed",
+        "round": 1,
+        "durationMs": 1580,
+        "title": "审题通过",
+        "detail": "六道题均核查无误：遍历序列推导、完全二叉树叶子数、祖先在中序中的相对位置、满二叉树结点数、递归定义简答均正确且可判分，未发现超纲、答案错误、选项缺陷或歧义问题。",
+        "issues": []
+      },
+      {
+        "id": "t7",
+        "at": 1794906166502,
+        "stage": "done",
+        "status": "passed",
+        "title": "流水线完成",
+        "detail": "共 1 轮 · 累计 4280 tokens",
+        "tokens": {
+          "promptTokens": 2689,
+          "completionTokens": 1591,
+          "totalTokens": 4280
+        }
+      }
+    ],
+    "usage": {
+      "promptTokens": 2689,
+      "completionTokens": 1591,
+      "totalTokens": 4280
+    },
+    "rounds": 1,
+    "elapsedMs": 9200
+  },
+  {
+    "title": "高等数学：函数极限与连续测试卷",
+    "subject": "高等数学",
+    "knowledgePoints": [
+      "函数极限",
+      "函数的连续性"
+    ],
+    "difficulty": "medium",
+    "durationMin": 45,
+    "questions": [
+      {
+        "id": "q1",
+        "type": "single",
+        "knowledgePoint": "函数极限的计算",
+        "difficulty": "easy",
+        "stem": "极限 $\\displaystyle\\lim_{x\\to 2}\\frac{x^2-4}{x-2}$ 的值为（ ）",
+        "options": [
+          {
+            "key": "A",
+            "text": "0"
+          },
+          {
+            "key": "B",
+            "text": "2"
+          },
+          {
+            "key": "C",
+            "text": "4"
+          },
+          {
+            "key": "D",
+            "text": "不存在"
+          }
+        ],
+        "answer": "C",
+        "explanation": "分子因式分解：$x^2-4=(x-2)(x+2)$，约去公因子 $x-2$（$x\\neq2$）得 $x+2$，代入 $x=2$ 得极限为 4。常见错误是直接代入得到 $\\frac{0}{0}$ 后误判为不存在。",
+        "points": 8
+      },
+      {
+        "id": "q2",
+        "type": "single",
+        "knowledgePoint": "函数极限的计算",
+        "difficulty": "medium",
+        "stem": "极限 $\\displaystyle\\lim_{x\\to 0}\\frac{\\sin 3x}{2x}$ 的值为（ ）",
+        "options": [
+          {
+            "key": "A",
+            "text": "$\\frac{3}{2}$"
+          },
+          {
+            "key": "B",
+            "text": "$\\frac{2}{3}$"
+          },
+          {
+            "key": "C",
+            "text": "3"
+          },
+          {
+            "key": "D",
+            "text": "1"
+          }
+        ],
+        "answer": "A",
+        "explanation": "利用重要极限 $\\lim_{t\\to0}\\frac{\\sin t}{t}=1$，将原式变形为 $\\frac{3}{2}\\cdot\\frac{\\sin 3x}{3x}$，当 $x\\to0$ 时 $\\frac{\\sin 3x}{3x}\\to1$，故极限为 $\\frac{3}{2}$。常见错误是忽略分母系数 2。",
+        "points": 10
+      },
+      {
+        "id": "q3",
+        "type": "fill",
+        "knowledgePoint": "函数极限的计算",
+        "difficulty": "medium",
+        "stem": "计算极限 $\\displaystyle\\lim_{x\\to\\infty}\\left(1+\\frac{2}{x}\\right)^{3x}=$ ______。",
+        "options": [],
+        "answer": "e^6",
+        "explanation": "利用重要极限 $\\lim_{t\\to\\infty}(1+\\frac{1}{t})^t=e$，将原式变形为 $\\left[\\left(1+\\frac{2}{x}\\right)^{x/2}\\right]^6$，当 $x\\to\\infty$ 时方括号内趋于 $e$，故极限为 $e^6$。常见错误是误写为 $e^3$ 或 $e^2$。",
+        "points": 10
+      },
+      {
+        "id": "q4",
+        "type": "fill",
+        "knowledgePoint": "函数的连续性",
+        "difficulty": "medium",
+        "stem": "若函数 $f(x)=\\begin{cases}\\dfrac{\\sin 2x}{x}, & x\\neq 0\\\\ a, & x=0\\end{cases}$ 在 $x=0$ 处连续，则常数 $a=$ ______。",
+        "options": [],
+        "answer": "2",
+        "explanation": "函数在 $x=0$ 处连续需满足 $\\lim_{x\\to0}f(x)=f(0)=a$。计算极限：$\\lim_{x\\to0}\\frac{\\sin 2x}{x}=2\\lim_{x\\to0}\\frac{\\sin 2x}{2x}=2$，故 $a=2$。常见错误是忘记系数 2 而写成 1。",
+        "points": 10
+      },
+      {
+        "id": "q5",
+        "type": "short",
+        "knowledgePoint": "函数的连续性",
+        "difficulty": "hard",
+        "stem": "设函数 $f(x)=\\begin{cases}\\dfrac{x^2-1}{x-1}, & x\\neq 1\\\\ b, & x=1\\end{cases}$，讨论 $b$ 取何值时 $f(x)$ 在 $x=1$ 处连续，并说明理由。",
+        "options": [],
+        "answer": "当 b=2 时，f(x) 在 x=1 处连续。理由：函数在 x=1 处连续需满足 lim_{x→1} f(x)=f(1)。计算极限：lim_{x→1} (x^2-1)/(x-1)=lim_{x→1} (x+1)=2，而 f(1)=b，故 b=2。",
+        "explanation": "评分要点：①正确写出连续性条件 $\\lim_{x\\to1}f(x)=f(1)$（2 分）；②正确化简并计算极限得 2（2 分）；③由 $b=2$ 得出结论（1 分）。常见错误是直接代入 $x=1$ 得到 $\\frac{0}{0}$ 后未化简。",
+        "points": 12
+      }
+    ],
+    "id": "paper_mwkgs14s0i70eu",
+    "createdAt": "2026-11-17T09:02:30.076Z",
+    "totalPoints": 50,
+    "spec": {
+      "subject": "高等数学",
+      "topic": "函数极限与连续",
+      "count": 5,
+      "totalPoints": 50,
+      "difficulty": "medium",
+      "types": [
+        "single",
+        "fill",
+        "short"
+      ],
+      "extra": "侧重计算，避免超纲"
+    },
+    "review": {
+      "passed": true,
+      "issues": [],
+      "summary": "五道题均考查函数极限与连续的核心内容，答案正确、选项无缺陷、填空答案唯一、简答题评分要点明确，未发现超纲或歧义问题。",
+      "rounds": 1
+    },
+    "pipelineTrace": [
+      {
+        "id": "t1",
+        "at": 1794906142030,
+        "stage": "pipeline",
+        "status": "running",
+        "title": "启动命题流水线",
+        "detail": "高等数学 · 函数极限与连续 · 5 题 · 总分 50"
+      },
+      {
+        "id": "t2",
+        "at": 1794906142030,
+        "stage": "generate",
+        "status": "running",
+        "round": 1,
+        "title": "出题 Agent 生成试卷",
+        "detail": "正在命制题目…"
+      },
+      {
+        "id": "t3",
+        "at": 1794906148327,
+        "stage": "generate",
+        "status": "passed",
+        "round": 1,
+        "durationMs": 6297,
+        "title": "试卷生成完成",
+        "detail": "5 题 · 总分 50 · 用时 6.297s",
+        "tokens": {
+          "promptTokens": 650,
+          "completionTokens": 1300,
+          "totalTokens": 1950
+        }
+      },
+      {
+        "id": "t4",
+        "at": 1794906148327,
+        "stage": "validate",
+        "status": "passed",
+        "round": 1,
+        "title": "本地结构校验",
+        "detail": "题型 / 选项 / 答案 / 分值 / 解析 全部通过",
+        "issues": []
+      },
+      {
+        "id": "t5",
+        "at": 1794906148327,
+        "stage": "review",
+        "status": "running",
+        "round": 1,
+        "title": "独立审题 Agent 交叉复核",
+        "detail": "敌对视角：默认假设题目有错，逐题核查超纲/答案/歧义"
+      },
+      {
+        "id": "t6",
+        "at": 1794906150076,
+        "stage": "review",
+        "status": "passed",
+        "round": 1,
+        "durationMs": 1748,
+        "title": "审题通过",
+        "detail": "五道题均考查函数极限与连续的核心内容，答案正确、选项无缺陷、填空答案唯一、简答题评分要点明确，未发现超纲或歧义问题。",
+        "issues": []
+      },
+      {
+        "id": "t7",
+        "at": 1794906150076,
+        "stage": "done",
+        "status": "passed",
+        "title": "流水线完成",
+        "detail": "共 1 轮 · 累计 4050 tokens",
+        "tokens": {
+          "promptTokens": 2587,
+          "completionTokens": 1463,
+          "totalTokens": 4050
+        }
+      }
+    ],
+    "usage": {
+      "promptTokens": 2587,
+      "completionTokens": 1463,
+      "totalTokens": 4050
+    },
+    "rounds": 1,
+    "elapsedMs": 8047
+  },
+  {
+    "title": "高等数学阶段测验：极限、连续、导数与中值定理",
+    "subject": "高等数学",
+    "knowledgePoints": [
+      "函数极限",
+      "函数连续",
+      "导数与微分",
+      "微分中值定理"
+    ],
+    "difficulty": "medium",
+    "durationMin": 90,
+    "questions": [
+      {
+        "id": "q1",
+        "type": "single",
+        "knowledgePoint": "函数极限",
+        "difficulty": "easy",
+        "stem": "极限 $\\lim\\limits_{x\\to 0}\\dfrac{\\sin 3x}{x}$ 的值为（ ）",
+        "options": [
+          {
+            "key": "A",
+            "text": "$0$"
+          },
+          {
+            "key": "B",
+            "text": "$1$"
+          },
+          {
+            "key": "C",
+            "text": "$3$"
+          },
+          {
+            "key": "D",
+            "text": "不存在"
+          }
+        ],
+        "answer": "C",
+        "explanation": "利用重要极限 $\\lim_{t\\to0}\\frac{\\sin t}{t}=1$，有 $\\frac{\\sin3x}{x}=3\\cdot\\frac{\\sin3x}{3x}\\to3$。常见错误是漏掉系数 3 而误选 B。",
+        "points": 10
+      },
+      {
+        "id": "q2",
+        "type": "single",
+        "knowledgePoint": "函数极限",
+        "difficulty": "medium",
+        "stem": "当 $x\\to 0$ 时，下列无穷小中与 $x^2$ 同阶但不等价的是（ ）",
+        "options": [
+          {
+            "key": "A",
+            "text": "$1-\\cos x$"
+          },
+          {
+            "key": "B",
+            "text": "$x\\sin x$"
+          },
+          {
+            "key": "C",
+            "text": "$\\tan x$"
+          },
+          {
+            "key": "D",
+            "text": "$\\ln(1+x^2)$"
+          }
+        ],
+        "answer": "A",
+        "explanation": "$1-\\cos x\\sim\\frac{x^2}{2}$，与 $x^2$ 同阶但极限为 $\\frac12\\neq1$，故同阶不等价；$x\\sin x\\sim x^2$ 是等价无穷小；$\\tan x\\sim x$ 是低阶；$\\ln(1+x^2)\\sim x^2$ 也是等价。常见错误是把等价与同阶混淆。",
+        "points": 12
+      },
+      {
+        "id": "q3",
+        "type": "single",
+        "knowledgePoint": "函数连续",
+        "difficulty": "medium",
+        "stem": "设 $f(x)=\\begin{cases}\\dfrac{1-\\cos x}{x^2}, & x\\neq 0,\\\\ a, & x=0,\\end{cases}$ 在 $x=0$ 处连续，则 $a=$（ ）",
+        "options": [
+          {
+            "key": "A",
+            "text": "$0$"
+          },
+          {
+            "key": "B",
+            "text": "$\\dfrac{1}{2}$"
+          },
+          {
+            "key": "C",
+            "text": "$1$"
+          },
+          {
+            "key": "D",
+            "text": "$2$"
+          }
+        ],
+        "answer": "B",
+        "explanation": "连续要求 $a=\\lim_{x\\to0}\\frac{1-\\cos x}{x^2}=\\lim_{x\\to0}\\frac{x^2/2}{x^2}=\\frac12$。常见错误是直接用 $1-\\cos x\\sim x^2$ 而误得 $a=1$。",
+        "points": 12
+      },
+      {
+        "id": "q4",
+        "type": "single",
+        "knowledgePoint": "导数与微分",
+        "difficulty": "medium",
+        "stem": "设 $y=x^x\\ (x>0)$，则 $\\left.\\dfrac{dy}{dx}\\right|_{x=1}=$（ ）",
+        "options": [
+          {
+            "key": "A",
+            "text": "$0$"
+          },
+          {
+            "key": "B",
+            "text": "$1$"
+          },
+          {
+            "key": "C",
+            "text": "$e$"
+          },
+          {
+            "key": "D",
+            "text": "$2$"
+          }
+        ],
+        "answer": "B",
+        "explanation": "取对数 $\\ln y=x\\ln x$，两边求导得 $\\frac{y'}{y}=\\ln x+1$，故 $y'=x^x(\\ln x+1)$，在 $x=1$ 处为 $1\\cdot(0+1)=1$。常见错误是把它当作幂函数得 $y'=x\\cdot x^{x-1}$ 而误选 B 之外的答案。",
+        "points": 13
+      },
+      {
+        "id": "q5",
+        "type": "fill",
+        "knowledgePoint": "函数极限",
+        "difficulty": "medium",
+        "stem": "计算极限 $\\lim\\limits_{x\\to\\infty}\\left(1+\\dfrac{2}{x}\\right)^{x}=$ ______。",
+        "options": [],
+        "answer": "e^2|$e^{2}$",
+        "explanation": "由重要极限 $\\lim_{t\\to0}(1+t)^{1/t}=e$，令 $t=\\frac{2}{x}$，则原式 $=\\left[\\left(1+\\frac2x\\right)^{x/2}\\right]^2\\to e^2$。常见错误是漏掉指数 2 而答成 $e$。",
+        "points": 13
+      },
+      {
+        "id": "q6",
+        "type": "fill",
+        "knowledgePoint": "导数与微分",
+        "difficulty": "medium",
+        "stem": "设 $y=\\ln(1+x^2)$，则其微分 $dy=$ ______ $\\,dx$。",
+        "options": [],
+        "answer": "2x/(1+x^2)|\\frac{2x}{1+x^2}",
+        "explanation": "$y'=\\frac{2x}{1+x^2}$，故 $dy=\\frac{2x}{1+x^2}dx$。常见错误是忘记复合函数内层求导，写成 $\\frac{1}{1+x^2}$。",
+        "points": 13
+      },
+      {
+        "id": "q7",
+        "type": "short",
+        "knowledgePoint": "函数连续",
+        "difficulty": "medium",
+        "stem": "设 $f(x)=\\begin{cases}x\\sin\\dfrac1x, & x\\neq0,\\\\ 0, & x=0.\\end{cases}$ 判断 $f(x)$ 在 $x=0$ 处是否连续，并说明理由。",
+        "options": [],
+        "answer": "连续。因为 |x sin(1/x)| ≤ |x| → 0 (x→0)，故 lim_{x→0} f(x)=0=f(0)，满足连续定义。",
+        "explanation": "评分要点：①指出需验证 $\\lim_{x\\to0}f(x)=f(0)$（2 分）；②利用有界性 $|\\sin\\frac1x|\\le1$ 得 $|x\\sin\\frac1x|\\le|x|\\to0$（2 分）；③由夹逼准则得极限为 0，等于函数值，故连续（1 分）。常见错误是认为 $\\sin\\frac1x$ 无极限就断言不连续，忽略了 $x$ 因子的作用。",
+        "points": 13
+      },
+      {
+        "id": "q8",
+        "type": "short",
+        "knowledgePoint": "微分中值定理",
+        "difficulty": "hard",
+        "stem": "叙述拉格朗日中值定理的条件与结论，并写出对 $f(x)=x^2$ 在区间 $[0,2]$ 上使用该定理时中值点 $\\xi$ 的值。",
+        "options": [],
+        "answer": "若 f(x) 在 [a,b] 上连续、在 (a,b) 内可导，则存在 ξ∈(a,b)，使 f(b)-f(a)=f'(ξ)(b-a)。对 f(x)=x^2 在 [0,2] 上：4-0=2ξ·2，得 ξ=1∈(0,2)。",
+        "explanation": "评分要点：①两个条件（闭区间连续、开区间可导）各 1 分；②结论公式 $f(b)-f(a)=f'(\\xi)(b-a)$ 且 $\\xi\\in(a,b)$ 共 2 分；③对 $x^2$ 代入得 $4=4\\xi$，解出 $\\xi=1$ 并验证属于 $(0,2)$（1 分）。常见错误是漏写条件或把 $\\xi$ 取在端点处。",
+        "points": 14
+      }
+    ],
+    "id": "paper_mwkgbeb0pqzt1u",
+    "createdAt": "2026-11-17T08:49:33.996Z",
+    "totalPoints": 100,
+    "spec": {
+      "subject": "高等数学",
+      "topic": "函数极限、函数连续、导数与微分、微分中值定理",
+      "count": 8,
+      "totalPoints": 100,
+      "difficulty": "medium",
+      "types": [
+        "single",
+        "fill",
+        "short"
+      ],
+      "extra": ""
+    },
+    "review": {
+      "passed": true,
+      "issues": [],
+      "summary": "全部题目均通过核查：知识点不超纲，答案正确，选项唯一，填空与简答答案可判分，LaTeX 语法正常。",
+      "rounds": 1
+    },
+    "pipelineTrace": [
+      {
+        "id": "t1",
+        "at": 1794905364588,
+        "stage": "pipeline",
+        "status": "running",
+        "title": "启动命题流水线",
+        "detail": "高等数学 · 函数极限、函数连续、导数与微分、微分中值定理 · 8 题 · 总分 100"
+      },
+      {
+        "id": "t2",
+        "at": 1794905364588,
+        "stage": "generate",
+        "status": "running",
+        "round": 1,
+        "title": "出题 Agent 生成试卷",
+        "detail": "正在命制题目…"
+      },
+      {
+        "id": "t3",
+        "at": 1794905372553,
+        "stage": "generate",
+        "status": "passed",
+        "round": 1,
+        "durationMs": 7965,
+        "title": "试卷生成完成",
+        "detail": "8 题 · 总分 100 · 用时 7.965s",
+        "tokens": {
+          "promptTokens": 648,
+          "completionTokens": 1740,
+          "totalTokens": 2388
+        }
+      },
+      {
+        "id": "t4",
+        "at": 1794905372553,
+        "stage": "validate",
+        "status": "passed",
+        "round": 1,
+        "title": "本地结构校验",
+        "detail": "题型 / 选项 / 答案 / 分值 / 解析 全部通过",
+        "issues": []
+      },
+      {
+        "id": "t5",
+        "at": 1794905372553,
+        "stage": "review",
+        "status": "running",
+        "round": 1,
+        "title": "独立审题 Agent 交叉复核",
+        "detail": "敌对视角：默认假设题目有错，逐题核查超纲/答案/歧义"
+      },
+      {
+        "id": "t6",
+        "at": 1794905373996,
+        "stage": "review",
+        "status": "passed",
+        "round": 1,
+        "durationMs": 1443,
+        "title": "审题通过",
+        "detail": "全部题目均通过核查：知识点不超纲，答案正确，选项唯一，填空与简答答案可判分，LaTeX 语法正常。",
+        "issues": []
+      },
+      {
+        "id": "t7",
+        "at": 1794905373996,
+        "stage": "done",
+        "status": "passed",
+        "title": "流水线完成",
+        "detail": "共 1 轮 · 累计 5370 tokens",
+        "tokens": {
+          "promptTokens": 3404,
+          "completionTokens": 1966,
+          "totalTokens": 5370
+        }
+      }
+    ],
+    "usage": {
+      "promptTokens": 3404,
+      "completionTokens": 1966,
+      "totalTokens": 5370
+    },
+    "rounds": 1,
+    "elapsedMs": 9409
+  },
+  {
+    "title": "高等数学阶段测试卷",
+    "subject": "高等数学",
+    "knowledgePoints": [
+      "函数极限",
+      "函数连续",
+      "导数与微分",
+      "微分中值定理"
+    ],
+    "difficulty": "medium",
+    "durationMin": 90,
+    "questions": [
+      {
+        "id": "q1",
+        "type": "single",
+        "knowledgePoint": "函数极限",
+        "difficulty": "easy",
+        "stem": "极限 $\\lim\\limits_{x \\to 0} \\frac{\\sin 3x}{x}$ 的值为（ ）",
+        "options": [
+          {
+            "key": "A",
+            "text": "$0$"
+          },
+          {
+            "key": "B",
+            "text": "$1$"
+          },
+          {
+            "key": "C",
+            "text": "$3$"
+          },
+          {
+            "key": "D",
+            "text": "$\\infty$"
+          }
+        ],
+        "answer": "C",
+        "explanation": "利用重要极限 $\\lim_{t\\to0}\\frac{\\sin t}{t}=1$，令 $t=3x$，得 $\\frac{\\sin 3x}{x}=3\\cdot\\frac{\\sin 3x}{3x}\\to 3$。常见错误是忽略系数而误选 B。",
+        "points": 10
+      },
+      {
+        "id": "q2",
+        "type": "single",
+        "knowledgePoint": "函数连续",
+        "difficulty": "medium",
+        "stem": "函数 $f(x)=\\begin{cases} \\dfrac{x^2-1}{x-1}, & x\\neq 1,\\\\ a, & x=1 \\end{cases}$ 在 $x=1$ 处连续，则常数 $a$ 的值为（ ）",
+        "options": [
+          {
+            "key": "A",
+            "text": "$0$"
+          },
+          {
+            "key": "B",
+            "text": "$1$"
+          },
+          {
+            "key": "C",
+            "text": "$2$"
+          },
+          {
+            "key": "D",
+            "text": "不存在"
+          }
+        ],
+        "answer": "C",
+        "explanation": "连续要求 $\\lim_{x\\to1}f(x)=f(1)$。而 $\\lim_{x\\to1}\\frac{x^2-1}{x-1}=\\lim_{x\\to1}(x+1)=2$，所以 $a=2$。常见错误是直接代入导致 $\\frac00$ 型而误判极限不存在。",
+        "points": 10
+      },
+      {
+        "id": "q3",
+        "type": "single",
+        "knowledgePoint": "导数与微分",
+        "difficulty": "medium",
+        "stem": "设 $y=x\\ln x$，则 $\\mathrm{d}y\\big|_{x=1}$ 等于（ ）",
+        "options": [
+          {
+            "key": "A",
+            "text": "$\\mathrm{d}x$"
+          },
+          {
+            "key": "B",
+            "text": "$2\\mathrm{d}x$"
+          },
+          {
+            "key": "C",
+            "text": "$0$"
+          },
+          {
+            "key": "D",
+            "text": "$\\ln 2\\,\\mathrm{d}x$"
+          }
+        ],
+        "answer": "A",
+        "explanation": "$y'=\\ln x+1$，故 $y'(1)=1$，微分 $\\mathrm{d}y=y'\\mathrm{d}x=\\mathrm{d}x$。常见错误是忘记乘积求导法则中的第二项或误将 $\\ln1=1$。",
+        "points": 10
+      },
+      {
+        "id": "q4",
+        "type": "single",
+        "knowledgePoint": "微分中值定理",
+        "difficulty": "medium",
+        "stem": "函数 $f(x)=x^3$ 在区间 $[0,1]$ 上满足拉格朗日中值定理，则定理结论中的 $\\xi$ 为（ ）",
+        "options": [
+          {
+            "key": "A",
+            "text": "$\\dfrac{1}{2}$"
+          },
+          {
+            "key": "B",
+            "text": "$\\dfrac{\\sqrt{3}}{3}$"
+          },
+          {
+            "key": "C",
+            "text": "$\\dfrac{\\sqrt{2}}{2}$"
+          },
+          {
+            "key": "D",
+            "text": "$\\dfrac{2}{3}$"
+          }
+        ],
+        "answer": "B",
+        "explanation": "拉格朗日中值定理：$f(1)-f(0)=f'(\\xi)(1-0)$，即 $1=3\\xi^2$，得 $\\xi=\\frac{\\sqrt3}{3}\\in(0,1)$。常见错误是直接取区间中点 $\\frac12$ 或解方程时舍去正根。",
+        "points": 10
+      },
+      {
+        "id": "q5",
+        "type": "fill",
+        "knowledgePoint": "函数极限",
+        "difficulty": "medium",
+        "stem": "极限 $\\lim\\limits_{x\\to 0}\\frac{1-\\cos x}{x^2}=$ ______。",
+        "options": [],
+        "answer": "1/2|0.5|\\frac{1}{2}",
+        "explanation": "利用等价无穷小 $1-\\cos x\\sim\\frac{x^2}{2}$，得极限为 $\\frac12$。也可用洛必达法则两次求导得到。常见错误是误用 $1-\\cos x\\sim x$。",
+        "points": 10
+      },
+      {
+        "id": "q6",
+        "type": "fill",
+        "knowledgePoint": "导数与微分",
+        "difficulty": "medium",
+        "stem": "设 $y=\\sin(x^2)$，则 $\\dfrac{\\mathrm{d}y}{\\mathrm{d}x}=$ ______。",
+        "options": [],
+        "answer": "2x\\cos(x^2)|2x\\cos x^2",
+        "explanation": "由复合函数求导法则，$y'=\\cos(x^2)\\cdot(x^2)'=2x\\cos(x^2)$。常见错误是漏乘内层导数 $2x$ 或写成 $\\cos(2x)$。",
+        "points": 10
+      },
+      {
+        "id": "q7",
+        "type": "fill",
+        "knowledgePoint": "函数连续",
+        "difficulty": "hard",
+        "stem": "若函数 $f(x)=\\begin{cases} \\dfrac{\\sin 2x}{x}, & x<0,\\\\ a+x, & x\\ge 0 \\end{cases}$ 在 $x=0$ 处连续，则 $a=$ ______。",
+        "options": [],
+        "answer": "2",
+        "explanation": "左极限 $\\lim_{x\\to0^-}\\frac{\\sin2x}{x}=2$，右极限 $\\lim_{x\\to0^+}(a+x)=a$，函数值 $f(0)=a$。连续要求左右极限相等，故 $a=2$。常见错误是只算一侧极限或忽略 $x=0$ 处函数值。",
+        "points": 15
+      },
+      {
+        "id": "q8",
+        "type": "short",
+        "knowledgePoint": "微分中值定理",
+        "difficulty": "hard",
+        "stem": "叙述罗尔中值定理的条件与结论，并指出函数 $f(x)=|x|$ 在区间 $[-1,1]$ 上是否满足罗尔中值定理的条件，说明理由。",
+        "options": [],
+        "answer": "条件：$f(x)$ 在 $[a,b]$ 上连续，在 $(a,b)$ 内可导，且 $f(a)=f(b)$。结论：存在 $\\xi\\in(a,b)$，使 $f'(\\xi)=0$。$f(x)=|x|$ 在 $[-1,1]$ 上连续且 $f(-1)=f(1)=1$，但在 $x=0$ 处不可导，故不满足罗尔定理条件。",
+        "explanation": "评分要点：①准确叙述连续、可导、端点值相等三个条件（3分）；②写出存在 $\\xi$ 使导数为零的结论（2分）；③判断 $f(x)=|x|$ 不满足条件（2分）；④指出 $x=0$ 处不可导（3分）。常见错误是只验证端点值相等而忽略可导性。",
+        "points": 25
+      }
+    ],
+    "id": "paper_mwkg2urqdnoxwh",
+    "createdAt": "2026-11-17T08:42:55.431Z",
+    "totalPoints": 100,
+    "spec": {
+      "subject": "高等数学",
+      "topic": "函数极限、函数连续、导数与微分、微分中值定理",
+      "count": 8,
+      "totalPoints": 100,
+      "difficulty": "medium",
+      "types": [
+        "single",
+        "fill",
+        "short"
+      ],
+      "extra": ""
+    },
+    "review": {
+      "passed": true,
+      "issues": [],
+      "summary": "八道题均考查给定知识点，答案与解析经独立核算正确，选项无重复或歧义，填空题答案唯一，简答题评分要点具体，未发现需要修改的问题。",
+      "rounds": 1
+    },
+    "pipelineTrace": [
+      {
+        "id": "t1",
+        "at": 1794904966117,
+        "stage": "pipeline",
+        "status": "running",
+        "title": "启动命题流水线",
+        "detail": "高等数学 · 函数极限、函数连续、导数与微分、微分中值定理 · 8 题 · 总分 100"
+      },
+      {
+        "id": "t2",
+        "at": 1794904966117,
+        "stage": "generate",
+        "status": "running",
+        "round": 1,
+        "title": "出题 Agent 生成试卷",
+        "detail": "正在命制题目…"
+      },
+      {
+        "id": "t3",
+        "at": 1794904974145,
+        "stage": "generate",
+        "status": "passed",
+        "round": 1,
+        "durationMs": 8028,
+        "title": "试卷生成完成",
+        "detail": "8 题 · 总分 100 · 用时 8.028s",
+        "tokens": {
+          "promptTokens": 648,
+          "completionTokens": 1951,
+          "totalTokens": 2599
+        }
+      },
+      {
+        "id": "t4",
+        "at": 1794904974145,
+        "stage": "validate",
+        "status": "passed",
+        "round": 1,
+        "title": "本地结构校验",
+        "detail": "题型 / 选项 / 答案 / 分值 / 解析 全部通过",
+        "issues": [
+          "分值合计无法调整到要求的总分 100"
+        ]
+      },
+      {
+        "id": "t5",
+        "at": 1794904974145,
+        "stage": "review",
+        "status": "running",
+        "round": 1,
+        "title": "独立审题 Agent 交叉复核",
+        "detail": "敌对视角：默认假设题目有错，逐题核查超纲/答案/歧义"
+      },
+      {
+        "id": "t6",
+        "at": 1794904975430,
+        "stage": "review",
+        "status": "passed",
+        "round": 1,
+        "durationMs": 1285,
+        "title": "审题通过",
+        "detail": "八道题均考查给定知识点，答案与解析经独立核算正确，选项无重复或歧义，填空题答案唯一，简答题评分要点具体，未发现需要修改的问题。",
+        "issues": []
+      },
+      {
+        "id": "t7",
+        "at": 1794904975430,
+        "stage": "done",
+        "status": "passed",
+        "title": "流水线完成",
+        "detail": "共 1 轮 · 累计 5456 tokens",
+        "tokens": {
+          "promptTokens": 3272,
+          "completionTokens": 2184,
+          "totalTokens": 5456
+        }
+      }
+    ],
+    "usage": {
+      "promptTokens": 3272,
+      "completionTokens": 2184,
+      "totalTokens": 5456
+    },
+    "rounds": 1,
+    "elapsedMs": 9315
+  }
+]

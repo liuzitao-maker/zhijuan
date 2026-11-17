@@ -1,0 +1,230 @@
+[
+  {
+    "id": "attempt_mwkgs33p6nt79d",
+    "paperId": "paper_mwkgs14s0i70eu",
+    "paperTitle": "高等数学：函数极限与连续测试卷",
+    "subject": "高等数学",
+    "createdAt": "2026-11-17T09:02:32.630Z",
+    "answers": [
+      {
+        "questionId": "q1",
+        "answer": "A"
+      },
+      {
+        "questionId": "q2",
+        "answer": "A"
+      },
+      {
+        "questionId": "q3",
+        "answer": "0"
+      },
+      {
+        "questionId": "q4",
+        "answer": "0"
+      },
+      {
+        "questionId": "q5",
+        "answer": "由极限的定义可知，函数在该点连续。"
+      }
+    ],
+    "score": 10,
+    "totalPoints": 50,
+    "accuracy": 20,
+    "results": [
+      {
+        "questionId": "q1",
+        "score": 0,
+        "maxScore": 8,
+        "verdict": "错误",
+        "feedback": "你选了 A，正确答案是 C。",
+        "autoGraded": true
+      },
+      {
+        "questionId": "q2",
+        "score": 10,
+        "maxScore": 10,
+        "verdict": "正确",
+        "feedback": "利用重要极限 $\\lim_{t\\to0}\\frac{\\sin t}{t}=1$，将原式变形为 $\\frac{3}{2}\\cdot\\frac{\\sin 3x}{3x}$，当 $x\\to0$ 时 $\\frac{\\sin 3x}{3x}\\to1$，故极限为 $\\frac{3}{2}$。常见错误是忽略分母系数 2。",
+        "autoGraded": true
+      },
+      {
+        "questionId": "q3",
+        "score": 0,
+        "maxScore": 10,
+        "verdict": "错误",
+        "feedback": "参考答案：e^6",
+        "autoGraded": true
+      },
+      {
+        "questionId": "q4",
+        "score": 0,
+        "maxScore": 10,
+        "verdict": "错误",
+        "feedback": "参考答案：2",
+        "autoGraded": true
+      },
+      {
+        "questionId": "q5",
+        "score": 0,
+        "maxScore": 12,
+        "verdict": "错误",
+        "feedback": "学生答案仅笼统提到“由极限的定义可知，函数在该点连续”，既没有计算极限 lim_{x→1}(x^2-1)/(x-1)=2，也没有利用连续条件 lim_{x→1}f(x)=f(1)=b 得出 b=2，未命中任何得分要点，故得 0 分。正确思路应为：先化简求极限得 2，再由 f(1)=b 与极限相等得 b=2。",
+        "autoGraded": true
+      }
+    ],
+    "knowledgeStats": [
+      {
+        "knowledgePoint": "函数极限的计算",
+        "got": 10,
+        "total": 28,
+        "accuracy": 35.7
+      },
+      {
+        "knowledgePoint": "函数的连续性",
+        "got": 0,
+        "total": 22,
+        "accuracy": 0
+      }
+    ],
+    "diagnosis": "最薄弱点是函数的连续性（0分）及极限计算中的填空题（q1、q3均错）。建议：先重做q4、q5，梳理连续定义与间断点判定步骤；再针对q1、q3整理极限计算中易错的代入、约分环节，每类各做3道同类题并写出完整步骤。",
+    "durationSec": 120
+  },
+  {
+    "id": "attempt_mwkg3a53y7lhyi",
+    "paperId": "paper_mwkg2urqdnoxwh",
+    "paperTitle": "高等数学阶段测试卷",
+    "subject": "高等数学",
+    "createdAt": "2026-11-17T08:43:15.351Z",
+    "answers": [
+      {
+        "questionId": "q1",
+        "answer": "C"
+      },
+      {
+        "questionId": "q2",
+        "answer": "C"
+      },
+      {
+        "questionId": "q3",
+        "answer": "A"
+      },
+      {
+        "questionId": "q4",
+        "answer": "B"
+      },
+      {
+        "questionId": "q5",
+        "answer": "1/2"
+      },
+      {
+        "questionId": "q6",
+        "answer": "2x\\cos(x^2)"
+      },
+      {
+        "questionId": "q7",
+        "answer": "2"
+      },
+      {
+        "questionId": "q8",
+        "answer": "先求出左右极限，令二者相等并与函数值比较，解得参数取值。"
+      }
+    ],
+    "score": 75,
+    "totalPoints": 100,
+    "accuracy": 75,
+    "results": [
+      {
+        "questionId": "q1",
+        "score": 10,
+        "maxScore": 10,
+        "verdict": "正确",
+        "feedback": "利用重要极限 $\\lim_{t\\to0}\\frac{\\sin t}{t}=1$，令 $t=3x$，得 $\\frac{\\sin 3x}{x}=3\\cdot\\frac{\\sin 3x}{3x}\\to 3$。常见错误是忽略系数而误选 B。",
+        "autoGraded": true
+      },
+      {
+        "questionId": "q2",
+        "score": 10,
+        "maxScore": 10,
+        "verdict": "正确",
+        "feedback": "连续要求 $\\lim_{x\\to1}f(x)=f(1)$。而 $\\lim_{x\\to1}\\frac{x^2-1}{x-1}=\\lim_{x\\to1}(x+1)=2$，所以 $a=2$。常见错误是直接代入导致 $\\frac00$ 型而误判极限不存在。",
+        "autoGraded": true
+      },
+      {
+        "questionId": "q3",
+        "score": 10,
+        "maxScore": 10,
+        "verdict": "正确",
+        "feedback": "$y'=\\ln x+1$，故 $y'(1)=1$，微分 $\\mathrm{d}y=y'\\mathrm{d}x=\\mathrm{d}x$。常见错误是忘记乘积求导法则中的第二项或误将 $\\ln1=1$。",
+        "autoGraded": true
+      },
+      {
+        "questionId": "q4",
+        "score": 10,
+        "maxScore": 10,
+        "verdict": "正确",
+        "feedback": "拉格朗日中值定理：$f(1)-f(0)=f'(\\xi)(1-0)$，即 $1=3\\xi^2$，得 $\\xi=\\frac{\\sqrt3}{3}\\in(0,1)$。常见错误是直接取区间中点 $\\frac12$ 或解方程时舍去正根。",
+        "autoGraded": true
+      },
+      {
+        "questionId": "q5",
+        "score": 10,
+        "maxScore": 10,
+        "verdict": "正确",
+        "feedback": "利用等价无穷小 $1-\\cos x\\sim\\frac{x^2}{2}$，得极限为 $\\frac12$。也可用洛必达法则两次求导得到。常见错误是误用 $1-\\cos x\\sim x$。",
+        "autoGraded": true
+      },
+      {
+        "questionId": "q6",
+        "score": 10,
+        "maxScore": 10,
+        "verdict": "正确",
+        "feedback": "由复合函数求导法则，$y'=\\cos(x^2)\\cdot(x^2)'=2x\\cos(x^2)$。常见错误是漏乘内层导数 $2x$ 或写成 $\\cos(2x)$。",
+        "autoGraded": true
+      },
+      {
+        "questionId": "q7",
+        "score": 15,
+        "maxScore": 15,
+        "verdict": "正确",
+        "feedback": "左极限 $\\lim_{x\\to0^-}\\frac{\\sin2x}{x}=2$，右极限 $\\lim_{x\\to0^+}(a+x)=a$，函数值 $f(0)=a$。连续要求左右极限相等，故 $a=2$。常见错误是只算一侧极限或忽略 $x=0$ 处函数值。",
+        "autoGraded": true
+      },
+      {
+        "questionId": "q8",
+        "score": 0,
+        "maxScore": 25,
+        "verdict": "错误",
+        "feedback": "学生答案完全未涉及罗尔中值定理的条件与结论，也未讨论 f(x)=|x| 在 [-1,1] 上的连续性与可导性，答非所问（内容为求极限与参数），得 0 分。应写出：f 在 [a,b] 连续、在 (a,b) 可导、f(a)=f(b)；结论为存在 ξ∈(a,b) 使 f'(ξ)=0；并指出 |x| 在 [-1,1] 连续且 f(-1)=f(1)，但在 x=0 处不可导，故不满足条件。",
+        "autoGraded": true
+      }
+    ],
+    "knowledgeStats": [
+      {
+        "knowledgePoint": "函数极限",
+        "got": 20,
+        "total": 20,
+        "accuracy": 100
+      },
+      {
+        "knowledgePoint": "函数连续",
+        "got": 25,
+        "total": 25,
+        "accuracy": 100
+      },
+      {
+        "knowledgePoint": "导数与微分",
+        "got": 20,
+        "total": 20,
+        "accuracy": 100
+      },
+      {
+        "knowledgePoint": "微分中值定理",
+        "got": 10,
+        "total": 35,
+        "accuracy": 28.6
+      }
+    ],
+    "diagnosis": "最薄弱点是微分中值定理：选择题得分但25分大题全错，说明只会套结论、不会构造辅助函数与规范书写证明。建议先精读拉格朗日、柯西定理的证明，每天选1道证明题，按“设辅助函数—验证条件—写结论”三步写出完整过程，再对照答案修正逻辑漏洞。",
+    "durationSec": 7
+  }
+]

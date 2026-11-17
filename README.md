@@ -178,6 +178,9 @@ DEEPSEEK_MODEL=deepseek-chat
 PORT=8787
 ```
 
+> 💡 **暂时没有 Key？也能先看效果。** 执行 `npm run demo:data` 会载入 6 份已生成的试卷与 2 份作答记录，
+> 打开页面即可浏览试卷、学情报告与流水线轨迹；生成新试卷、AI 批改仍需配置 Key。
+
 ### 3. 启动（约 15 秒）
 
 ```bash
