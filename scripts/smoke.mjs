@@ -1,4 +1,4 @@
-﻿/**
+/**
  * 冒烟测试：不打开浏览器，用一条命令验证「生成 → 审题 → 作答 → 批改」整条闭环。
  * 用于复现验证与 CI。运行前需已启动 API 服务（npm run dev:server）。
  *
@@ -118,7 +118,7 @@ async function main() {
   log('·', `学情诊断：${attempt.diagnosis}`)
   log('·', `知识点：${attempt.knowledgeStats.map((item) => `${item.knowledgePoint} ${item.accuracy}%`).join('，')}`)
   log('✓', `全链路耗时 ${((Date.now() - startedAt) / 1000).toFixed(1)}s`)
-  console.log('\n报告地址（浏览器）：', `${BASE}/#/reports/${attempt.id}`)
+  console.log('\n报告地址（浏览器）：', `${BASE}//reports/${attempt.id}`)
 }
 
 main().catch((error) => {
