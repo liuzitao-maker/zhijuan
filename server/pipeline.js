@@ -124,16 +124,57 @@ export async function runGenerationPipeline(spec, { emit, signal }) {
     mergeUsage(usage, reviewResult.usage)
 
     const rawReview = reviewResult.data ?? {}
-    const issues = Array.isArray(rawReview.issues) ? rawReview.issues : []
+    // 新契约：审题者对每道题给出二元裁定 verdicts[]，由程序据此生成问题清单。
+    // 这样即使模型措辞含糊，也不会出现「说没问题却判不通过」的情况。
+    const verdicts = Array.isArray(rawReview.verdicts) ? rawReview.verdicts : []
+    let issues
+    if (Array.isArray(rawReview.verdicts)) {
+      issues = verdicts
+        .filter((verdict) => verdict && verdict.ok === false)
+        .map((verdict) => ({
+          questionId: String(verdict.questionId ?? '?'),
+          category: String(verdict.category ?? '未分类'),
+          severity: ['blocker', 'major', 'minor'].includes(verdict.severity)
+            ? verdict.severity
+            : 'minor',
+          detail: String(verdict.evidence ?? verdict.detail ?? '').trim(),
+        }))
+        .filter((issue) => issue.detail.length > 0)
+    } else if (Array.isArray(rawReview.issues)) {
+      // 兼容旧契约：模型偶尔会按历史格式返回 issues
+      issues = rawReview.issues.map((issue) => ({
+        questionId: String(issue?.questionId ?? '?'),
+        category: String(issue?.category ?? '未分类'),
+        severity: ['blocker', 'major', 'minor'].includes(issue?.severity)
+          ? issue.severity
+          : 'minor',
+        detail: String(issue?.evidence ?? issue?.detail ?? '').trim(),
+      }))
+    } else {
+      // 输出既没有 verdicts 也没有 issues —— 视为审题失败，交由修复环节重试，
+      // 而不是静默地当作「通过」。
+      issues = [
+        {
+          questionId: '-',
+          category: '审题异常',
+          severity: 'blocker',
+          detail: '审题者未按契约返回 verdicts，需重新审题',
+        },
+      ]
+    }
+
     // 收敛策略：第 1 轮 blocker 与 major 都阻断；后续轮次只让 blocker 阻断，
     // 避免陷入「审题者不断提出新的风格建议 → 永远无法通过」的死循环。
     const blocking = issues.filter(
       (issue) =>
-        issue?.severity === 'blocker' || (round === 1 && issue?.severity === 'major'),
+        issue.severity === 'blocker' || (round === 1 && issue.severity === 'major'),
     )
     // 本地硬校验是「一票否决」：即使审题者放过，结构不合法也不允许交付。
     // 这一点很关键——审题提示词里已告知它「总分由程序校验」，程序就必须真的把关。
-    const passed = rawReview.passed === true && blocking.length === 0 && localOk
+    // 以「结构化问题清单」为准判定是否通过：
+    // 模型偶尔会给出自相矛盾的结论（issues 里没有 blocker，却把 passed 置为 false），
+    // 因此不直接信任布尔值，而是按严重度重新计算，避免无谓的重试。
+    const passed = blocking.length === 0 && localOk
 
     // 本地硬问题转成「问题清单」交给修复 Agent，格式与审题问题保持一致
     const localBlockingIssues = localOk

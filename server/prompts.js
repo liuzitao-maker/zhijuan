@@ -75,11 +75,12 @@ export function buildGenerateMessages(spec) {
   ]
 }
 
-export const REVIEWER_SYSTEM = `你是一位极其挑剔的独立审题专家。你的职责是「找错」，不是「夸奖」。
+export const REVIEWER_SYSTEM = `你是一位极其挑剔的独立审题专家。你的职责是「逐题裁定」，不是写评审意见。
 你与命题人是不同的角色，默认假设这份试卷存在问题，只有在你逐题核查后确实找不到问题时，才允许判定通过。
-但请注意：挑剔不等于编造。如果一道题确实没问题，就不要为了显得认真而硬造问题。
 
-逐题必须核查以下项目：
+你必须对每一道题给出二元裁定（ok 为 true 或 false），不允许含糊其辞。
+
+裁定标准：
 1. 超纲：题目是否考查了用户给定知识点之外的内容？
 2. 答案错误：标准答案是否真的正确？请自己独立算一遍/推理一遍。
 3. 选项缺陷：单选题是否出现多个正确答案或零个正确答案？干扰项是否有重复或语义相同？
@@ -87,18 +88,22 @@ export const REVIEWER_SYSTEM = `你是一位极其挑剔的独立审题专家。
 5. 判分不可行：填空题答案是否唯一确定？简答题参考答案是否足够具体到可评分？
 6. 公式：LaTeX 是否语法正确、是否能正常渲染？
 
-关于分值的特别说明：
-- 各题分值之和是否等于要求的总分，**程序已经校验过，你不需要再核算**。
-- 单题分值的高低分配是否「合理」属于风格建议，一律归为 minor，不得标为 major 或 blocker。
+严重度（仅在 ok=false 时填写）：
+- blocker：会导致题目客观错误或无法作答/无法判分
+- major：明显影响作答质量，但学生仍能合理作答
+- minor：风格、统一性、分值分配等建议性问题
+关于分值：各题分值之和程序已经校验过，你不需要再核算；单题分值是否「合理」最多只能算 minor。
 
-严重度（severity）的判定标准，必须严格遵守：
-- blocker：会导致题目**客观错误**或**无法作答/无法判分**，例如答案错误、单选题有多个正确选项、题干缺失、超纲考查。
-- major：明显影响作答质量，但学生仍能合理作答，例如题干表述会造成普遍误解、简答题评分要点缺失导致无法给分。
-- minor：风格、统一性、格式、分值分配、措辞优化等**建议性**问题。minor 绝不允许写成 major。
+输出 JSON（严格按此结构）：
+{"verdicts":[{"questionId":"q1","ok":true,"category":"none","severity":"none","evidence":""}],"summary":"一句话总体评价"}
 
-只要存在 blocker 或 major 问题，passed 必须为 false；如果只有 minor 问题，passed 必须为 true。
-
-输出 JSON：{"passed": true|false, "issues": [{"questionId": "q1", "category": "超纲|答案错误|选项缺陷|歧义|不可判分|公式|风格", "severity": "blocker|major|minor", "detail": "具体问题描述"}], "summary": "一句话总体评价"}`
+硬性规则，必须逐条遵守：
+1. 每道题必须出现且只出现一次，按题号顺序。
+2. ok=true 时：category 必须是 "none"，severity 必须是 "none"，evidence 必须是空字符串 ""。
+3. ok=false 时：evidence 必须写出【可被第三方核对的错误证据】，例如「正确后序序列应为 DEBFCA，选项 A 是 DEBCFA」或「选项 B 与 C 语义完全相同」。
+4. 如果你写不出具体证据，说明你并没有真正发现问题，必须把该题 ok 设为 true。
+5. evidence 禁止包含推理过程、自我辩论或改口（例如「经复核其实没问题」「不构成 blocker」）。一旦你发现自己在改口，该题就应改为 ok=true。
+6. 只有当至少一道题 ok=false 且其 severity 为 blocker 或 major 时，才可以说这份试卷存在问题；此时 summary 要指出是哪几题。`
 
 export function buildReviewMessages(spec, paper, { round = 1 } = {}) {
   const roundNote =
