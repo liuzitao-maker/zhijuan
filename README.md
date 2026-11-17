@@ -7,6 +7,11 @@
   <img alt="AI" src="https://img.shields.io/badge/AI-DeepSeek-4f46e5" />
   <img alt="stack" src="https://img.shields.io/badge/stack-React%20%2B%20Express-6366f1" />
   <img alt="license" src="https://img.shields.io/badge/license-MIT-0f9d6e" />
+  <img alt="tests" src="https://img.shields.io/badge/tests-9%20passing-0f9d6e" />
+</p>
+
+<p align="center">
+  <b>仓库地址</b>：https://github.com/liuzitao-maker/zhijuan
 </p>
 
 ---
