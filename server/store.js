@@ -15,7 +15,14 @@ const FILES = {
 let ready = false
 
 async function ensureReady() {
-  if (ready) return
+  // 目录可能在使用过程中被清理（例如演示前重置数据），因此每次写入前都确保存在。
+  if (!ready) {
+    await fs.mkdir(config.dataDir, { recursive: true })
+    ready = true
+  }
+}
+
+async function ensureDataDir() {
   await fs.mkdir(config.dataDir, { recursive: true })
   ready = true
 }
@@ -33,7 +40,7 @@ async function readCollection(name) {
 }
 
 async function writeCollection(name, value) {
-  await ensureReady()
+  await ensureDataDir()
   const file = path.join(config.dataDir, FILES[name])
   const temp = `${file}.tmp`
   await fs.writeFile(temp, JSON.stringify(value, null, 2), 'utf8')

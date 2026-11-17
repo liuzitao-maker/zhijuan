@@ -41,5 +41,5 @@ process.on('SIGINT', () => shutdown(0))
 process.on('SIGTERM', () => shutdown(0))
 
 console.log('▶ 启动 API 服务 (8787) 与前端 (5173) ...')
-run('api', process.execPath, [path.join(root, 'server', 'index.js')])
+run('api', process.execPath, ['--watch', path.join(root, 'server', 'index.js')])
 run('web', process.execPath, [path.join(root, 'node_modules', 'vite', 'bin', 'vite.js')])
