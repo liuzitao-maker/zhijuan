@@ -1,4 +1,4 @@
-/**
+﻿/**
  * 冒烟测试：不打开浏览器，用一条命令验证「生成 → 审题 → 作答 → 批改」整条闭环。
  * 用于复现验证与 CI。运行前需已启动 API 服务（npm run dev:server）。
  *
@@ -125,3 +125,4 @@ main().catch((error) => {
   console.error('✗ 冒烟测试失败：', error.message)
   process.exit(1)
 })
+
