@@ -80,7 +80,19 @@ function reconcilePoints(questions, targetPoints) {
     question.points = Math.round(question.points * 2) / 2
   })
 
-  return Math.abs(diff) < 0.01
+  // 四舍五入可能再次产生残差，把残余差值放到分值最大的题上，确保精确命中目标总分
+  const afterRounding = questions.reduce((sum, question) => sum + question.points, 0)
+  const residual = Number((targetPoints - afterRounding).toFixed(2))
+  if (Math.abs(residual) >= 0.01) {
+    let heaviest = 0
+    for (let i = 1; i < questions.length; i += 1) {
+      if (questions[i].points > questions[heaviest].points) heaviest = i
+    }
+    questions[heaviest].points = Math.round((questions[heaviest].points + residual) * 2) / 2
+  }
+
+  const finalTotal = questions.reduce((sum, question) => sum + question.points, 0)
+  return Math.abs(finalTotal - targetPoints) < 0.01
 }
 
 export function normalizePaper(raw, spec) {

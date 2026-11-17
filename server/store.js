@@ -132,6 +132,7 @@ export const store = {
       readCollection('attempts'),
     ])
     const scored = attempts.filter((attempt) => typeof attempt.accuracy === 'number')
+    // attempt.accuracy 已经是 0-100 的百分数，这里直接取均值，不能再乘 100
     const averageAccuracy = scored.length
       ? scored.reduce((sum, attempt) => sum + attempt.accuracy, 0) / scored.length
       : 0
@@ -149,7 +150,7 @@ export const store = {
     return {
       paperCount: papers.length,
       attemptCount: attempts.length,
-      averageAccuracy: Number((averageAccuracy * 100).toFixed(1)),
+      averageAccuracy: Number(averageAccuracy.toFixed(1)),
       knowledge: [...knowledgeMap.entries()]
         .map(([knowledgePoint, value]) => ({
           knowledgePoint,
