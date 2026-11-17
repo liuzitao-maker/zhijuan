@@ -1,4 +1,4 @@
-# 智卷 · AI 智能出卷与批改引擎
+﻿# 智卷 · AI 智能出卷与批改引擎
 
 > 一个知识点 → 一份可作答、可自动批改、可诊断学情的完整试卷。
 > 核心主张：**让 AI 出题，也让 AI 互相监考。**
@@ -40,7 +40,9 @@
 
 完整演示（**6 分 00 秒 / 1920×1080 / 含中文字幕**）：覆盖工作台、双智能体流水线实时运行、在线作答、学情报告，以及 2 分 14 秒的 AI 协同过程复现。
 
-📹 [docs/demo/zhijuan-demo-1080p.mp4](docs/demo/zhijuan-demo-1080p.mp4)
+📹 **B站（公开可播放）**：[https://www.bilibili.com/video/BV1CRsB6jEBq/](https://www.bilibili.com/video/BV1CRsB6jEBq/)
+
+📁 仓库内备份：[docs/demo/zhijuan-demo-1080p.mp4](docs/demo/zhijuan-demo-1080p.mp4)
 
 ---
 
@@ -308,3 +310,4 @@ AI 在其中承担实现，人类负责**意图定义、方案取舍与结果验
 ## 十、许可证
 
 MIT License
+
