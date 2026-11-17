@@ -247,6 +247,32 @@ export default function Generate() {
 
           <PipelineTrace events={trace} />
 
+          {trace.length === 0 ? (
+            <div
+              style={{
+                marginTop: 4,
+                padding: '14px 16px',
+                borderRadius: 11,
+                background: 'var(--surface-2)',
+                border: '1px dashed var(--line-strong)',
+                fontSize: 12,
+                lineHeight: 2,
+                color: 'var(--ink-500)',
+              }}
+            >
+              <div style={{ fontWeight: 600, color: 'var(--ink-700)', marginBottom: 4 }}>
+                这条流水线做四件事
+              </div>
+              ① 出题智能体按知识点命题
+              <br />
+              ② 本地代码校验结构（题型/选项/答案/分值）
+              <br />
+              ③ 独立审题智能体以敌对视角逐题挑错
+              <br />
+              ④ 有问题就打回修复，最多 2 轮
+            </div>
+          ) : null}
+
           {paper ? (
             <div className="alert alert-info" style={{ marginTop: 14 }}>
               已生成《{paper.title}》：{paper.questions.length} 题，满分 {paper.totalPoints}，共{' '}

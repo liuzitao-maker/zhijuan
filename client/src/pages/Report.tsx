@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router-dom'
 import KnowledgeRadar from '../components/KnowledgeRadar'
 import PaperRenderer from '../components/PaperRenderer'
 import { getAttempt, getPaper, type Attempt, type Paper } from '../lib/api'
+import { RichText } from '../lib/math'
 
 function verdictChip(verdict: string, accuracy: number) {
   if (verdict === '正确' || accuracy >= 100) return 'chip chip-success'
@@ -99,11 +100,14 @@ export default function Report() {
         </div>
       </div>
 
-      <div className="two-col" style={{ marginTop: 16 }}>
+      <div
+        className="two-col"
+        style={{ marginTop: 16, gridTemplateColumns: 'minmax(0, 0.85fr) minmax(0, 1.5fr)' }}
+      >
         <div className="card card-pad">
           <h3 className="card-title">知识点掌握度</h3>
           <div style={{ display: 'flex', justifyContent: 'center' }}>
-            <KnowledgeRadar data={attempt.knowledgeStats} size={290} />
+            <KnowledgeRadar data={attempt.knowledgeStats} size={260} />
           </div>
         </div>
 
@@ -126,7 +130,13 @@ export default function Report() {
                 </div>
                 {question ? (
                   <div style={{ fontSize: 13, color: '#2a2620', lineHeight: 1.8, marginBottom: 6 }}>
-                    {question.stem.length > 110 ? `${question.stem.slice(0, 110)}…` : question.stem}
+                    <RichText
+                      text={
+                        question.stem.length > 110
+                          ? `${question.stem.slice(0, 110)}…`
+                          : question.stem
+                      }
+                    />
                   </div>
                 ) : null}
                 <div className="bar" style={{ marginBottom: 8 }}>
@@ -136,7 +146,9 @@ export default function Report() {
                   />
                 </div>
                 {result.feedback ? (
-                  <div className="q-feedback">💬 {result.feedback}</div>
+                  <div className="q-feedback">
+                    💬 <RichText text={result.feedback} />
+                  </div>
                 ) : null}
               </div>
             )
