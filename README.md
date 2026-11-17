@@ -42,6 +42,8 @@
 
 📹 **B站（公开可播放）**：[https://www.bilibili.com/video/BV1CRsB6jEBq/](https://www.bilibili.com/video/BV1CRsB6jEBq/)
 
+📦 **完整作品包下载（网盘，含源码/文档/视频）**：https://pan.quark.cn/s/3f471bf51f60 提取码：Z9Ws
+
 📁 仓库内备份：[docs/demo/zhijuan-demo-1080p.mp4](docs/demo/zhijuan-demo-1080p.mp4)
 
 ---
@@ -310,4 +312,5 @@ AI 在其中承担实现，人类负责**意图定义、方案取舍与结果验
 ## 十、许可证
 
 MIT License
+
 
