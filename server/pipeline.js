@@ -90,17 +90,17 @@ export async function runGenerationPipeline(spec, { emit, signal }) {
 
     // ── 2. 本地结构校验（廉价关卡）────────────────────────────────
     const validation = validatePaper(paper, spec)
+    const localOk = validation.ok
     const localIssues = [...normalized.issues, ...validation.issues]
 
     push({
       stage: 'validate',
-      status: localIssues.length === 0 ? 'passed' : 'warn',
+      status: localOk ? 'passed' : 'failed',
       round,
       title: '本地结构校验',
-      detail:
-        localIssues.length === 0
-          ? '题型 / 选项 / 答案 / 分值 / 解析 全部通过'
-          : `发现 ${localIssues.length} 处结构问题`,
+      detail: localOk
+        ? '题型 / 选项 / 答案 / 分值 / 解析 全部通过'
+        : `发现 ${validation.issues.length} 处硬性问题，将交由修复 Agent 处理`,
       issues: localIssues,
     })
 
@@ -131,7 +131,19 @@ export async function runGenerationPipeline(spec, { emit, signal }) {
       (issue) =>
         issue?.severity === 'blocker' || (round === 1 && issue?.severity === 'major'),
     )
-    const passed = rawReview.passed === true && blocking.length === 0
+    // 本地硬校验是「一票否决」：即使审题者放过，结构不合法也不允许交付。
+    // 这一点很关键——审题提示词里已告知它「总分由程序校验」，程序就必须真的把关。
+    const passed = rawReview.passed === true && blocking.length === 0 && localOk
+
+    // 本地硬问题转成「问题清单」交给修复 Agent，格式与审题问题保持一致
+    const localBlockingIssues = localOk
+      ? []
+      : validation.issues.map((detail) => ({
+          questionId: '-',
+          category: '结构',
+          severity: 'blocker',
+          detail,
+        }))
 
     review = {
       passed,
@@ -140,24 +152,35 @@ export async function runGenerationPipeline(spec, { emit, signal }) {
       rounds: round,
     }
 
+    const reasonParts = []
+    if (blocking.length > 0) {
+      reasonParts.push(
+        `${blocking.length} 个语义问题：${blocking
+          .map((issue) => `${issue.questionId ?? '?'} ${issue.category ?? ''}`)
+          .slice(0, 3)
+          .join('；')}`,
+      )
+    }
+    if (!localOk) {
+      reasonParts.push(`${validation.issues.length} 处结构问题：${validation.issues.slice(0, 2).join('；')}`)
+    }
+
     push({
       stage: 'review',
       status: passed ? 'passed' : 'failed',
       round,
       durationMs: Date.now() - reviewStartedAt,
-      title: passed ? '审题通过' : '审题未通过',
+      title: passed ? '审题通过' : '复核未通过',
       detail: passed
         ? String(rawReview.summary ?? '未发现阻断性问题')
-        : `${blocking.length} 个阻断性问题：${blocking
-            .map((issue) => `${issue.questionId ?? '?'} ${issue.category ?? ''}`)
-            .slice(0, 4)
-            .join('；')}`,
+        : reasonParts.join(' / '),
       issues,
     })
 
     if (passed) break
 
-    lastIssues = blocking.length > 0 ? blocking : issues
+    lastIssues = [...blocking, ...localBlockingIssues]
+    if (lastIssues.length === 0) lastIssues = issues
     if (round > MAX_REPAIR_ROUNDS) {
       push({
         stage: 'pipeline',
@@ -170,11 +193,31 @@ export async function runGenerationPipeline(spec, { emit, signal }) {
     }
   }
 
+  // 交付前的最后一道闸门：无论审题者怎么判，结构硬校验不过就不允许标记为「通过」。
+  const finalValidation = validatePaper(paper, spec)
+  if (review) {
+    review.passed = Boolean(review.passed) && finalValidation.ok
+    if (!finalValidation.ok) {
+      review.summary = `${review.summary}｜结构仍存在问题：${finalValidation.issues.join('；')}`
+      review.issues = [
+        ...(review.issues ?? []),
+        ...finalValidation.issues.map((detail) => ({
+          questionId: '-',
+          category: '结构',
+          severity: 'blocker',
+          detail,
+        })),
+      ]
+    }
+  }
+
   push({
     stage: 'done',
     status: review?.passed ? 'passed' : 'warn',
     title: '流水线完成',
-    detail: `共 ${round} 轮 · 累计 ${usage.totalTokens} tokens`,
+    detail: review?.passed
+      ? `共 ${round} 轮 · 累计 ${usage.totalTokens} tokens`
+      : `共 ${round} 轮 · 仍有问题，已标记待人工复核 · 累计 ${usage.totalTokens} tokens`,
     tokens: usage,
   })
 

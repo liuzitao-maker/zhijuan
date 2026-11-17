@@ -44,6 +44,45 @@ function normalizeOptions(rawOptions) {
 /**
  * 尝试把模型的原始输出「修复」成合法结构（能救就救，救不了就报问题）。
  */
+/**
+ * 确定性分值归位：把各题分值之和精确调整到目标总分。
+ *
+ * 这是「验证比生成便宜」的又一次落地 —— 分值加总是一个纯算术问题，
+ * 完全不需要花一轮模型修复去解决。优先从分值最大的题开始吸收差值，
+ * 并保证每题最低 1 分。
+ */
+function reconcilePoints(questions, targetPoints) {
+  if (questions.length === 0) return false
+  let total = questions.reduce((sum, question) => sum + question.points, 0)
+  let diff = Number((targetPoints - total).toFixed(2))
+  if (Math.abs(diff) < 0.01) return false
+
+  const order = questions
+    .map((_, index) => index)
+    .sort((a, b) => questions[b].points - questions[a].points)
+
+  for (const index of order) {
+    if (Math.abs(diff) < 0.01) break
+    const question = questions[index]
+    if (diff > 0) {
+      question.points += diff
+      diff = 0
+    } else {
+      const absorb = Math.min(question.points - 1, -diff)
+      if (absorb > 0) {
+        question.points -= absorb
+        diff += absorb
+      }
+    }
+  }
+
+  questions.forEach((question) => {
+    question.points = Math.round(question.points * 2) / 2
+  })
+
+  return Math.abs(diff) < 0.01
+}
+
 export function normalizePaper(raw, spec) {
   const issues = []
   const source = raw && typeof raw === 'object' ? raw : {}
@@ -113,6 +152,17 @@ export function normalizePaper(raw, spec) {
     if (seen.has(question.id)) question.id = `q${index + 1}-dup`
     seen.add(question.id)
   })
+
+  // 分值归位：算术问题用算术解决，不占用模型修复轮次
+  const beforeTotal = normalizedQuestions.reduce((sum, question) => sum + question.points, 0)
+  if (reconcilePoints(normalizedQuestions, spec.totalPoints)) {
+    const afterTotal = normalizedQuestions.reduce((sum, question) => sum + question.points, 0)
+    if (Math.abs(beforeTotal - afterTotal) > 0.01) {
+      issues.push(`分值合计 ${beforeTotal} 与要求 ${spec.totalPoints} 不符，已自动调整`)
+    }
+  } else {
+    issues.push(`分值合计无法调整到要求的总分 ${spec.totalPoints}`)
+  }
 
   const paper = {
     title: String(source.title ?? `${spec.subject} · ${spec.topic} 练习卷`).trim(),
